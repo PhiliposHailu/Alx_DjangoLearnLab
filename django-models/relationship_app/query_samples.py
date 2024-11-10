@@ -5,7 +5,7 @@ def books_by_author(author_name):
         # Get the author by name
         author = Author.objects.get(name=author_name)
         # Get all books by this author
-        books = Book.objects.filter(author=author)
+        books = Book.objects.get(author=author)
         print(f"Books by {author_name}:")
         for book in books:
             print(f"- {book.title}")
@@ -34,4 +34,4 @@ def librarian_for_library(library_name):
         for librarian in librarians:
             print(f"- {librarian.name}")
     except Library.DoesNotExist:
-        print(f"No library found with the name: {library_name}")git
+        print(f"No library found with the name: {library_name}")
