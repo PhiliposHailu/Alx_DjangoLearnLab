@@ -17,12 +17,35 @@ def check_role(role):
 def admin_view(request):
     return HttpResponse("Welcome Admin!")
 
+def admin_view_with_error(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login.html')  # Or redirect to the login page
+    elif request.user.userprofile.role != 'Admin':
+        return render(request, 'relationship_app/admin_view.html')  # Access Denied page
+    return HttpResponse("Welcome Admin!")
+
+
 @user_passes_test(check_role('Librarian'))
 def librarian_view(request):
     return HttpResponse("Welcome Librarian!")
 
+def librarian_view_with_error(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login.html')  # Or redirect to the login page
+    elif request.user.userprofile.role != 'Librarian':
+        return render(request, 'relationship_app/librarian_view.html')  # Access Denied page
+    return HttpResponse("Welcome Librarian!")
+
+
 @user_passes_test(check_role('Member'))
 def member_view(request):
+    return HttpResponse("Welcome Member!")
+
+def member_view_with_error(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login.html')  # Or redirect to the login page
+    elif request.user.userprofile.role != 'Member':
+        return render(request, 'relationship_app/member_view.html')  # Access Denied page
     return HttpResponse("Welcome Member!")
 
 
