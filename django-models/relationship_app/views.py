@@ -10,26 +10,20 @@ from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 
 
-def is_admin(user):
-    return user.userprofile.role == 'Admin'
+def check_role(role):
+    return lambda u: u.userprofile.role == role
 
-def is_librarian(user):
-    return user.userprofile.role == 'Librarian'
-
-def is_member(user):
-    return user.userprofile.role == 'Member'
-
-@user_passes_test(is_admin)
+@user_passes_test(check_role('Admin'))
 def admin_view(request):
-    return HttpResponse("Welcome to the Admin Dashboard")
+    return HttpResponse("Welcome Admin!")
 
-@user_passes_test(is_librarian)
+@user_passes_test(check_role('Librarian'))
 def librarian_view(request):
-    return HttpResponse("Welcome to the Librarian Dashboard")
+    return HttpResponse("Welcome Librarian!")
 
-@user_passes_test(is_member)
+@user_passes_test(check_role('Member'))
 def member_view(request):
-    return HttpResponse("Welcome to the Member Dashboard")
+    return HttpResponse("Welcome Member!")
 
 
 
