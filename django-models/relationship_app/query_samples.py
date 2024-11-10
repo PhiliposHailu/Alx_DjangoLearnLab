@@ -11,3 +11,15 @@ def books_by_author(author_name):
             print(f"- {book.title}")
     except Author.DoesNotExist:
         print(f"No author found with the name: {author_name}")
+        
+def books_in_library(library_name):
+    try:
+        # Get the library by name
+        library = Library.objects.get(name=library_name)
+        # Get all books associated with this library
+        books = library.books.all()
+        print(f"Books in {library_name} library:")
+        for book in books:
+            print(f"- {book.title}")
+    except Library.DoesNotExist:
+        print(f"No library found with the name: {library_name}")
