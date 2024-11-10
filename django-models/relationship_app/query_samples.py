@@ -29,9 +29,9 @@ def librarian_for_library(library_name):
         # Get the library by name
         library = Library.objects.get(name=library_name)
         # Retrieve all librarians for this library
-        librarians = Librarian.objects.filter(library=library)
+        librarians = Librarian.objects.get(library=library)
         print(f"Librarians for {library_name} library:")
         for librarian in librarians:
             print(f"- {librarian.name}")
     except Library.DoesNotExist:
-        print(f"No library found with the name: {library_name}")
+        print(f"No library found with the name: {library_name}")git
