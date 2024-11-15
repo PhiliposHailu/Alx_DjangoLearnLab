@@ -20,7 +20,7 @@ def books_by_author(author_name):
 def books_in_library(library_name):
     try:
         library = Library.objects.get(name=library_name)
-        books = library.book.all()
+        books = library.books.all()
 
         print(f"books in {library_name} library.")
         for book in books:
