@@ -37,3 +37,4 @@ def register(request):
     return render(request, 'relationship_app/register.html', {'form' : form})
 
 
+from django.contrib.auth import login
