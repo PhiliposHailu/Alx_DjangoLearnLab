@@ -51,10 +51,10 @@ def check_member(user):
 
 @user_passes_test(check_admin)
 def admin_view(request):
-    return HttpResponse("Welcome to the Admin Page!")
+    return render(request, 'relationship_app/admin_view.html')
 @user_passes_test(check_librarian)
 def librarian_view(request):
-    return HttpResponse("Welcome to the Librarian Page!")
+    return render(request, 'relationship_app/librarian_view.html')
 @user_passes_test(check_member)
 def member_view(request):
-    return HttpResponse("Welcome to the Member Page!")
+    return render(request, 'relationship_app/member_view.html')
