@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Book
 
+
 def list_books(request):
     books = Book.objects.all()
     context = {
@@ -39,8 +40,8 @@ def register(request):
 
 
 
-from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test
+
 
 def check_admin(user):
     return user.is_authenticated and user.userprofile.role == 'Admin'
@@ -58,3 +59,35 @@ def librarian_view(request):
 @user_passes_test(check_member)
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+
+
+
+from django.contrib.auth.decorators import permission_required
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+
+@permission_required('relationship_app/can_add_book', raise_exception=True)
+def add_book(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        publication_year = request.POST.get('publication_year')
+        book = Book.objects.create(title=title, author=author, publication_year=publication_year)
+    return HttpResponse(f"{book.title} added successfully")
+
+@permission_required('relationship_app/can_change_book', raise_exception=True)
+def edit_book(request,book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == 'POST':
+        book.title = request.POST.get('title')
+        book.author = request.POST.get('author')
+        book.publication_year = request.POST.get('publication_year')
+        book.save()
+    return HttpResponse(f" Book edited to {book.title} successfully")
+
+@permission_required('relationship_app/can_delete_book', raise_exception=True)
+def delete_book(request,book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == 'POST':
+        book.delete()
+    return HttpResponse(f" Book deleted successfully")
