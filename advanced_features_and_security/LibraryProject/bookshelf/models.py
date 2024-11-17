@@ -7,7 +7,7 @@ class Book(models.Model):
     publication_year = models.IntegerField()
 
     class Meta:
-        permission = [
+        permissions = [
             ('can_view', 'can_view'),
             ('can_create', 'can_create'),
             ('can_edit', 'can_edit'),
