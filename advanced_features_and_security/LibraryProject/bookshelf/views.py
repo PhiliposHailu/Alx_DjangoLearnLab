@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Book
-from .forms import BookSearchForm  # Import the form
+from .forms import ExampleForm  # Import the form
 
 
 
@@ -52,7 +52,7 @@ def search_books(request):
 
 
 def search_books(request):
-    form = BookSearchForm(request.GET)  # Bind query parameters to the form
+    form = ExampleForm(request.GET)  # Bind query parameters to the form
     if form.is_valid():  # Validate the form
         query = form.cleaned_data['query']
         books = Book.objects.filter(title__icontains=query)  # Safe ORM query
