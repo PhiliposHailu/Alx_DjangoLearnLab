@@ -27,3 +27,16 @@ class CustomUserAdmin(UserAdmin):
     )
     
 admin.site.register(CustomUser, CustomUserAdmin)
+
+
+
+from django import path
+from . import views
+
+urlpatterns = [
+    path('books/', views.list_books, name='list_books'),
+    path('books/<int:book_id>/', views.view_book, name='view_book'),
+    path('books/<int:book_id>/edit/', views.edit_book, name='edit_book'),
+    path('books/<int:book_id>/delete/', views.delete_book, name='delete_book'),
+    path('books/add/', views.add_book, name='add_book'),
+]
