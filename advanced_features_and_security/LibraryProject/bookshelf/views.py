@@ -13,8 +13,8 @@ def view_book(request, book_id):
 @permission_required('bookshelf.can_view', raise_exception=True)
 def list_books(request):
     books = Book.objects.all()
-    books_list = ", ".join([book.title for book in books])
-    return HttpResponse(f"Books: {books_list}")
+    book_list = ", ".join([book.title for book in books])
+    return HttpResponse(f"Books: {book_list}")
 
 @permission_required('bookshelf.can_create', raise_exception=True)
 def add_book(request):
