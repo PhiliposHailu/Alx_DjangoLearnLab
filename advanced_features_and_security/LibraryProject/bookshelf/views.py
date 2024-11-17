@@ -1,8 +1,10 @@
 
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from .models import Book
+from .forms import BookSearchForm  # Import the form
+
 
 
 @permission_required('bookshelf.can_view', raise_exception=True)
@@ -41,3 +43,19 @@ def delete_book(request,book_id):
     if request.method == 'POST':
         book.delete()
     return HttpResponse(f" Book deleted successfully")
+
+
+def search_books(request):
+    query = request.GET.get('q', '')
+    books = Book.objects.filter(title_icontains=query)
+    return render(request, 'bookshelf/book_list.html',{'books': books})
+
+
+def search_books(request):
+    form = BookSearchForm(request.GET)  # Bind query parameters to the form
+    if form.is_valid():  # Validate the form
+        query = form.cleaned_data['query']
+        books = Book.objects.filter(title__icontains=query)  # Safe ORM query
+    else:
+        books = Book.objects.none()  # Return an empty queryset if invalid
+    return render(request, 'bookshelf/book_list.html', {'books': books, 'form': form})
