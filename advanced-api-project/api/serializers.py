@@ -12,7 +12,8 @@ class BookSerializer(serializers.ModelSerializer):
         cur_year = datetime.now().year
         if data['publication_year'] > cur_year:
             raise serializers.ValidationError("The year must not be greater than current year.")
-
+        return data
+        
 #serializes all the fields of the Author model
 class AuthorSerializer(serializers.ModelSerializer):
     books = BookSerializer(many=True, read_only=True)
