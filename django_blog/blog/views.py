@@ -12,3 +12,6 @@ def register(request):
         else:
             form = UserRegisteration()
         return  render(request, 'auth/register.html', {'form' : form})
+    
+def profile(request):
+    return render(request, 'blog/profile.html')
