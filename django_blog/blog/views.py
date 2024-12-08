@@ -18,22 +18,22 @@ def register(request):
 
 class BlogListView(ListView):
     model = Post
-    template_name = 'blog/list_posts.html'
+    template_name = 'blog/listing.html'
 
 class BlogDetailView(DetailView):
     model = Post
-    template_name = 'blog/details_of_posts.html'
+    template_name = 'blog/viewing.html'
 
 class BlogCreateView(CreateView):
     model = Post
     fields = "__all _"
-    template_name = 'blog/create_update.html'
+    template_name = 'blog/createing.html'
 
 class BlogUpdateView(UpdateView):
     model = Post
     fields = "__all _"
-    template_name = 'blog/create_update.html'
+    template_name = 'blog/editing.html'
 
 class BlogDeleteView(DeleteView):
     model = Post
-    template_name = 'blog/delete_post.html'
+    template_name = 'blog/deleting.html'

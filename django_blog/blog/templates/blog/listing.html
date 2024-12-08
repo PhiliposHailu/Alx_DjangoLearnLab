@@ -5,10 +5,8 @@
 <ul>
     {% for post in posts %}
         <li>
-            <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a>
             <small>by {{ post.author }}</small>
         </li>
     {% endfor %}
 </ul>
-<a href="{% url 'post-create' %}">Create New Post</a>
 {% endblock %}
