@@ -1,12 +1,8 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}Register - Django Blog{% endblock %}
+<link rel="stylesheet" href="{% static 'blog/styles.css' %}">
 
-{% block content %}
-<h2>Register</h2>
+<h1>Register</h1>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Register</button>
 </form>
-{% endblock %}

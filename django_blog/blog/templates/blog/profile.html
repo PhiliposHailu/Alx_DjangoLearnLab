@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}Profile - Django Blog{% endblock %}
+<link rel="stylesheet" href="{% static 'blog/styles.css' %}">
 
-{% block content %}
-<h2>Welcome, {{ user.username }}</h2>
+<h1>Profile</h1>
+{% csrf_token %}
+<p>Username: {{ user.username }}</p>
 <p>Email: {{ user.email }}</p>
-<a href="{% url 'logout' %}">Logout</a>
-{% endblock %}
