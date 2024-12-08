@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g4+-l1(uuxb4y$_j4)m(78-(%e@amda7%11f(_58aq0f^w5_@i'
+SECRET_KEY = 'django-insecure-i@u+i8*go#2q=%6iobreo49$yetuge6ix@f()u^20u3tx0%l+0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog.apps.BlogConfig',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -52,10 +53,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_blog.urls'
 
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -81,9 +83,9 @@ WSGI_APPLICATION = 'django_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'philipos',
-        'PASSWORD': 'password',
+        'NAME': 'your_db_name',
+        'USER': 'your_db_user',
+        'PASSWORD': 'your_db_password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -107,8 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
 
 # Internationalization
@@ -121,6 +121,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
