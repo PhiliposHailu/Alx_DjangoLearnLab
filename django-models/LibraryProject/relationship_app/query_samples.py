@@ -12,7 +12,7 @@ def books_by_author(author_name):
         print(f"books authored by {author_name}")
         for book in books:
             print(book.title)
-    except Library.DoesNotExist:
+    except Author.DoesNotExist:
         print(f"No author found withe the name: {author_name}")
 
 
