@@ -18,7 +18,11 @@ class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        library = self.get_object()
+        context['books'] = library.books.all()
+        return context
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
